@@ -1,22 +1,16 @@
-# main text of home
-name: Jane Doe
-bio: A Girl who travels the world eating noodles
+name: Jekyll Themes
+url: http://matt.harzewski.com
+description: Insert tagline here
 
-# twitter summary info
-description: A blog about technology and stuff related
+permalink: /themes/:title/
 
-picture: assets/images/picture.jpg
+gems: [jekyll-paginate]
 
-url: http://koppl.in/violet
-# your url: http://USERNAME.github.io
+highlighter: pygments
+paginate: 20
 
-# if you don't have any of social below, comment the line
-facebook: myfacebook
-twitter: mytwitter
-github: mygithub
-email: me@jane.doe
+markdown: rdiscount
+rdiscount:
+    extensions: ['smart']
 
-gems:
-  - jekyll-seo-tag
-
-exclude: [README.md, Gemfile, Gemfile.lock, _site, Rakefile, travis.sh, vendor]
+exclude: ['README.md', 'Gemfile.lock', 'Gemfile', 'Rakefile', 'vendor']

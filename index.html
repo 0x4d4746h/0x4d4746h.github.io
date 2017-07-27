@@ -1,51 +1,59 @@
 ---
 layout: default
-title: Home
+title: Jekyll Themes
 ---
-<header>
-  <img alt="{{ site.name }} picture" src="{{ site.picture }}" />
 
-  <h1>
-    <strong><a href="./">{{ site.name }}</a></strong>
-  </h1>
+<div class="gallery">
+	{% for post in paginator.posts %}
+		<div class="item">
+			<a class="item-inner" href="{{ post.url }}">
+				<div class="item-image"><img src="/thumbnails/{{ post.thumbnail }}"></div>
+				<div class="item-name">{{ post.title }}</div>
+			</a>
+		</div>
+	{% endfor %}
+</div>
 
-  <p>
-    Some Cool Company</br>
-    Brazil, Barueri-SP</br>
-    Front-end Developer
-  </p>
+<!-- Pager -->
 
-  <nav>
-    <ul>
-      <li><a href="https://twitter.com/{{ site.twitter }}">Twitter</a></li>
-      <li><a href="https://github.com/{{ site.github }}">Github</a></li>
-      <li><a href="mailto:{{ site.email }}">me AT jane DOT doe</a></li>
-    </ul>
-  </nav>
+<div class="row-fluid">
+  <div class="span12">
+    <div class="pagination">
+      <ul>
+        {% if paginator.previous_page %}
 
-  <small>
-    <a href="https://github.com/sergiokopplin/violet">Violet</a> theme
-    <br> inspired on <a href="http://cyberglot.me/">Ju Gonçalves</a>
-  </small>
-</header>
+          {% if paginator.previous_page == 1 %}
+            <li><a href="/">Prev</a></li>
+          {% else %}
+            <li><a href="/page{{ paginator.previous_page }}">Prev</a></li>
+          {% endif %}
 
-<section class="content">
-  <p>
-    Student at School of Code, creator of <a href="http://aweso.me/">Awesome</a>. Front-end Developer looking for responsive challenges. Programmer at <a href="https://google.com/search?q=cool+company">Cool Company</a>.
-  </p>
+        {% else %}
+          <li><span class="disabled">Prev</span></li>
+        {% endif %}
 
-  <p>
-    Member of the <a href="https://google.com/search?q=big+bang+theory+show">The Big Band Theory</a>, playing drums with love. Recording a new disco inside my garage. Willing to be the new Slayer girl drummer. <a href="https://google.com/search?q=black+metal">Black Metal lover</a>.
-  </p>
+        {% if paginator.page == 1 %}
+          <li><span class="active">1</span></li>
+        {% else %}
+          <li><a href="/">1</a></li>
+        {% endif %}
 
-  <p>
-    <strong>Study Interests</strong></br>
-    Javascript without <a href="http://vanilla-js.com/">jQuery</a>. Lorem Ipsum generators. Bands that don't exist yet.
-  </p>
+        {% for count in (2..paginator.total_pages) %}
 
-  <p>
-    <strong>Projects</strong></br>
-    <a href="http://aweso.me/">Awesome Project</a>. Just some jQuery lib.
-    <br>My band, on weekends. <a href="https://google.com/search?q=my+band">The Big Band Theory</a>
-  </p>
-</section>
+          {% if count == paginator.page %}
+            <li><span class="active">{{ count }}</span></li>
+          {% else %}
+            <li><a href="/page{{ count }}">{{ count }}</a></li>
+          {% endif %}
+        {% endfor %}
+
+        {% if paginator.next_page %}
+          <li><a href="/page{{ paginator.next_page }}">Next</a></li>
+        {% else %}
+          <li><span class="disabled">Next</span></li>
+        {% endif %}
+      </ul>
+    </div>
+  </div>
+</div>
+
